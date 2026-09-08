@@ -26,6 +26,10 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm install
+      - name: Include Telegram Brain static app
+        run: |
+          mkdir -p public/telegram-brain
+          cp telegram-brain/index.html public/telegram-brain/index.html
       - name: Build static PWA
         run: npm run build
       - name: Upload Pages artifact
