@@ -3,52 +3,128 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#08111d" />
 <title>Telegram Brain</title>
-<meta name="theme-color" content="#07111f" />
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{font-family:Tahoma,Arial,sans-serif;color:#eef6ff;background:#06101d}*{box-sizing:border-box}body{margin:0;min-width:320px;min-height:100vh;background:radial-gradient(circle at 15% 10%,#143867 0,transparent 28%),radial-gradient(circle at 85% 85%,#0b6c8050 0,transparent 30%),#06101d;color:#eef6ff}button,input{font:inherit}.glass{background:linear-gradient(135deg,#ffffff14,#ffffff08);border:1px solid #ffffff18;box-shadow:0 20px 55px #0008;backdrop-filter:blur(18px)}.hidden{display:none!important}.auth{min-height:100vh;display:grid;place-items:center;padding:20px}.auth-card{width:min(430px,100%);border-radius:28px;padding:34px;text-align:center}.logo{font-size:54px}.muted{color:#8fa3bc}.tabs{display:grid;grid-template-columns:1fr 1fr;background:#0004;padding:4px;border-radius:13px;margin:22px 0 14px}.tabs button{border:0;background:transparent;color:#8da0ba;padding:10px;border-radius:10px;cursor:pointer}.tabs button.active{background:#ffffff12;color:#fff}.form{display:grid;gap:10px}.input{width:100%;background:#06101a;border:1px solid #ffffff18;color:#fff;border-radius:13px;padding:13px;outline:none}.primary{border:0;background:linear-gradient(135deg,#1f97ff,#5458ff);color:#fff;padding:12px 17px;border-radius:13px;cursor:pointer}.notice{margin-top:13px;padding:11px;border-radius:10px;background:#ffffff0d;color:#d5e2f3;font-size:13px}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}.side{margin:16px;border-radius:24px;padding:18px;position:sticky;top:16px;height:calc(100vh - 32px);display:flex;flex-direction:column}.brand{display:flex;gap:10px;align-items:center;padding:8px 6px 22px}.brand span{font-size:31px}.brand small{display:block;color:#7890ad}.nav{display:grid;gap:6px}.nav button,.logout{border:0;background:transparent;color:#9fb0c7;padding:12px 13px;border-radius:12px;cursor:pointer;text-align:right}.nav button.active,.nav button:hover{background:#1d93ff22;color:white}.logout{margin-top:auto;color:#ffadb7}.main{padding:28px 32px 100px;min-width:0}.head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:24px}.head h2{font-size:28px;margin:0 0 7px}.badge{background:#ffffff0d;border:1px solid #ffffff18;border-radius:999px;padding:8px 12px;color:#aebbd0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}.stat{border-radius:20px;padding:19px;display:grid;gap:8px}.stat b{font-size:29px}.stat small{color:#8fa0b7}.panel{border-radius:21px;padding:20px;margin-bottom:14px}.panel h3{margin-top:0}.row{padding:13px 0;border-bottom:1px solid #ffffff0c}.row:last-child{border:0}.row .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row .meta span{color:#68aff7;font-size:12px}.row p{margin:7px 0;color:#d3dfef;line-height:1.8}.row time{font-size:11px;color:#71859f}.search{display:grid;grid-template-columns:1fr auto;gap:10px}.cards{display:grid;gap:10px;margin-top:14px}.empty{text-align:center;padding:32px;color:#7f93ad}.table .item{display:grid;grid-template-columns:1fr auto auto;gap:18px;align-items:center;padding:15px;border-bottom:1px solid #ffffff0b}.table .item:last-child{border:0}.type{font-size:11px;color:#7890aa}.upload{padding:40px;text-align:center}.upload .big{font-size:44px}.file{display:inline-block;margin-top:12px}.file input{display:none}.progress{margin-top:16px;color:#b9c9dd}.check{display:flex;justify-content:center;gap:8px;align-items:center;margin:14px 0;color:#b8c7d8}.ok{color:#68e6ae}@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:fixed;z-index:30;bottom:10px;top:auto;left:10px;right:10px;height:auto;margin:0;padding:8px;border-radius:18px}.brand,.logout{display:none}.nav{display:flex;overflow:auto}.nav button{min-width:max-content}.main{padding:22px 14px 94px}.stats{grid-template-columns:1fr 1fr}.head{display:block}.badge{display:inline-block;margin-top:10px}}@media(max-width:520px){.stats{grid-template-columns:1fr}.table .item{grid-template-columns:1fr auto}.table time{display:none}.upload{padding:26px 14px}}
+:root{font-family:Tahoma,Arial,sans-serif;background:#07111f;color:#eef6ff}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 20% 10%,#173b68 0,transparent 28%),radial-gradient(circle at 80% 80%,#0b6c8050 0,transparent 30%),#07111f}.hidden{display:none!important}.glass{background:linear-gradient(135deg,#ffffff13,#ffffff07);border:1px solid #ffffff18;box-shadow:0 24px 60px #0008;backdrop-filter:blur(18px)}button,input{font:inherit}.auth{min-height:100vh;display:grid;place-items:center;padding:22px}.card{width:min(460px,100%);padding:34px;border-radius:30px;text-align:center}.logo{font-size:58px}.muted{color:#93a6bf}.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:26px 0 14px;background:#0004;padding:5px;border-radius:14px}.tabs button{border:0;border-radius:11px;padding:12px;background:transparent;color:#9aabc1;cursor:pointer}.tabs button.active{background:#ffffff12;color:#fff}.form{display:grid;gap:12px}.input{width:100%;padding:14px 15px;border-radius:14px;border:1px solid #ffffff18;background:#06101a;color:#fff;outline:none}.primary{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(135deg,#2098ff,#5756ff);color:#fff;cursor:pointer;font-weight:700}.primary:disabled{opacity:.6;cursor:wait}.notice{margin-top:13px;padding:12px;border-radius:12px;background:#ffffff0d;color:#dce7f5;font-size:13px;line-height:1.8}.error{background:#7d1d2b55;color:#ffd8dd}.ok{background:#0d6c4d55;color:#bff6df}.app{min-height:100vh;display:grid;grid-template-columns:250px 1fr}.side{margin:16px;padding:18px;border-radius:24px;height:calc(100vh - 32px);position:sticky;top:16px;display:flex;flex-direction:column}.brand{display:flex;gap:10px;align-items:center;padding:8px 6px 24px}.brand .emoji{font-size:31px}.brand small{display:block;color:#8195af}.nav{display:grid;gap:7px}.nav button,.logout{border:0;background:transparent;color:#a3b3c9;text-align:right;padding:12px;border-radius:12px;cursor:pointer}.nav button.active,.nav button:hover{background:#1f96ff22;color:#fff}.logout{margin-top:auto;color:#ffb1ba}.main{padding:28px 32px 100px}.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:22px}.head h2{margin:0 0 8px;font-size:28px}.badge{padding:8px 12px;border:1px solid #ffffff18;background:#ffffff0b;border-radius:999px;color:#becbdb}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}.stat,.panel{border-radius:20px;padding:19px}.stat{display:grid;gap:8px}.stat b{font-size:30px}.stat small{color:#91a1b7}.panel{margin-bottom:14px}.row{padding:13px 0;border-bottom:1px solid #ffffff0d}.row:last-child{border-bottom:0}.meta{display:flex;gap:10px;flex-wrap:wrap}.meta span{color:#69aff9;font-size:12px}.row p{line-height:1.9;color:#d8e3f0}.row time{color:#7488a3;font-size:11px}.search{display:grid;grid-template-columns:1fr auto;gap:10px}.empty{text-align:center;padding:32px;color:#8196b1}.upload{text-align:center;padding:38px}.upload .big{font-size:48px}.check{display:flex;justify-content:center;align-items:center;gap:8px;margin:15px 0;color:#c0cedd}.file{display:inline-block;margin-top:8px}.file input{display:none}.progress{margin-top:15px;color:#c8d6e5}.chatItem{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #ffffff0d}.chatItem:last-child{border:0}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:fixed;z-index:10;left:10px;right:10px;bottom:10px;top:auto;height:auto;margin:0;padding:8px}.brand,.logout{display:none}.nav{display:flex;overflow:auto}.nav button{min-width:max-content}.main{padding:22px 14px 95px}.stats{grid-template-columns:1fr 1fr}.head{display:block}.badge{display:inline-block;margin-top:10px}}@media(max-width:520px){.stats{grid-template-columns:1fr}.upload{padding:24px 12px}}
 </style>
 </head>
 <body>
-<div id="auth" class="auth">
-  <div class="auth-card glass">
-    <div class="logo">🧠</div><h1>Telegram Brain</h1><div class="muted">حافظه هوشمند گفتگوهای تلگرام</div>
-    <div class="tabs"><button id="signinTab" class="active">ورود</button><button id="signupTab">ساخت حساب</button></div>
-    <form id="authForm" class="form"><input id="email" class="input" type="email" placeholder="ایمیل" required><input id="password" class="input" type="password" minlength="6" placeholder="رمز عبور" required><button id="authBtn" class="primary">ورود</button></form>
-    <div id="authMsg" class="notice hidden"></div>
+<div id="authView" class="auth">
+  <div class="card glass">
+    <div class="logo">🧠</div>
+    <h1>Telegram Brain</h1>
+    <div class="muted">حافظه هوشمند گفتگوهای تلگرام</div>
+    <div class="tabs">
+      <button id="signinTab" class="active" type="button">ورود</button>
+      <button id="signupTab" type="button">ساخت حساب</button>
+    </div>
+    <form id="authForm" class="form">
+      <input id="emailInput" class="input" type="email" autocomplete="email" placeholder="ایمیل" required>
+      <input id="passwordInput" class="input" type="password" autocomplete="current-password" minlength="6" placeholder="رمز عبور (حداقل ۶ کاراکتر)" required>
+      <button id="authButton" class="primary" type="submit">ورود</button>
+    </form>
+    <div id="authMessage" class="notice hidden"></div>
   </div>
 </div>
-<div id="app" class="app hidden">
-  <aside class="side glass"><div class="brand"><span>🧠</span><div><b>Telegram Brain</b><small>Second Brain</small></div></div><div class="nav" id="nav"></div><button id="logout" class="logout">خروج</button></aside>
+
+<div id="appView" class="app hidden">
+  <aside class="side glass">
+    <div class="brand"><div class="emoji">🧠</div><div><b>Telegram Brain</b><small>Second Brain</small></div></div>
+    <div id="nav" class="nav"></div>
+    <button id="logoutButton" class="logout">خروج</button>
+  </aside>
   <main class="main"><div id="content"></div></main>
 </div>
+
 <script>
-const SB_URL='https://cohandrixpdthmpbxnsc.supabase.co';
-const SB_KEY='sb_publishable_hPH1KRp-KM_RDY0pMwzT2w_SbF-jHjB';
-const db=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true}});
-let mode='signin',session=null,page='dashboard';
-const pages=[['dashboard','داشبورد'],['search','جست‌وجو'],['chats','گفتگوها'],['import','ورود اطلاعات']];
-const esc=s=>String(s??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
-const fa=n=>Number(n||0).toLocaleString('fa-IR');
-function setMode(m){mode=m;signinTab.classList.toggle('active',m==='signin');signupTab.classList.toggle('active',m==='signup');authBtn.textContent=m==='signin'?'ورود':'ساخت حساب';authMsg.classList.add('hidden')}
-signinTab.onclick=()=>setMode('signin');signupTab.onclick=()=>setMode('signup');
-authForm.onsubmit=async e=>{e.preventDefault();authBtn.disabled=true;authBtn.textContent='در حال انجام...';let r;if(mode==='signin')r=await db.auth.signInWithPassword({email:email.value,password:password.value});else r=await db.auth.signUp({email:email.value,password:password.value});if(r.error){authMsg.textContent=r.error.message;authMsg.classList.remove('hidden')}else if(mode==='signup'&&!r.data.session){authMsg.textContent='حساب ساخته شد. ایمیل تأیید را بررسی کن.';authMsg.classList.remove('hidden')}authBtn.disabled=false;authBtn.textContent=mode==='signin'?'ورود':'ساخت حساب'};
-logout.onclick=()=>db.auth.signOut();
-function shell(){nav.innerHTML=pages.map(([id,label])=>'<button data-p="'+id+'" class="'+(page===id?'active':'')+'">'+label+'</button>').join('');nav.querySelectorAll('button').forEach(b=>b.onclick=()=>{page=b.dataset.p;shell();render()})}
-async function boot(){const {data}=await db.auth.getSession();session=data.session;toggle();db.auth.onAuthStateChange((_e,s)=>{session=s;toggle()})}
-function toggle(){auth.classList.toggle('hidden',!!session);app.classList.toggle('hidden',!session);if(session){shell();render()}}
-async function render(){if(!session)return;content.innerHTML='<div class="empty">در حال بارگذاری...</div>';if(page==='dashboard')return dashboard();if(page==='search')return searchPage();if(page==='chats')return chats();if(page==='import')return importPage()}
-async function dashboard(){const [c,m,r]=await Promise.all([db.from('telegram_chats').select('*',{count:'exact',head:true}),db.from('telegram_messages').select('*',{count:'exact',head:true}),db.from('telegram_messages').select('id,sender_name,text,sent_at,telegram_chats(title)').order('sent_at',{ascending:false}).limit(8)]);const recent=r.data||[];content.innerHTML='<div class="head"><div><h2>داشبورد</h2><div class="muted">خلاصه حافظه تلگرام تو</div></div><span class="badge">'+esc(session.user.email)+'</span></div><div class="stats"><div class="stat glass"><span>💬</span><b>'+fa(m.count)+'</b><small>پیام</small></div><div class="stat glass"><span>👥</span><b>'+fa(c.count)+'</b><small>گفتگو</small></div><div class="stat glass"><span>🔒</span><b>RLS</b><small>داده خصوصی</small></div></div><div class="panel glass"><h3>آخرین پیام‌ها</h3>'+(recent.length?recent.map(x=>'<div class="row"><div class="meta"><b>'+esc(x.sender_name||'نامشخص')+'</b><span>'+esc(x.telegram_chats?.title||'')+'</span></div><p>'+esc(x.text||'[بدون متن]')+'</p><time>'+new Date(x.sent_at).toLocaleString('fa-IR')+'</time></div>').join(''):'<div class="empty">هنوز پیامی وارد نشده.</div>')+'</div>'}
-function searchPage(){content.innerHTML='<div class="head"><div><h2>جست‌وجو</h2><div class="muted">بین پیام‌های تلگرام بگرد</div></div></div><form id="searchForm" class="search panel glass"><input id="q" class="input" placeholder="مثلاً: صحبت حسینی درباره دفتر"><button class="primary">جست‌وجو</button></form><div id="results" class="cards"></div>';searchForm.onsubmit=async e=>{e.preventDefault();if(!q.value.trim())return;results.innerHTML='<div class="empty">در حال جست‌وجو...</div>';const {data,error}=await db.rpc('keyword_message_search',{query_text:q.value.trim(),match_count:50});if(error){results.innerHTML='<div class="notice">'+esc(error.message)+'</div>';return}const rows=data||[];results.innerHTML=rows.length?rows.map(x=>'<div class="panel glass row"><div class="meta"><b>'+esc(x.sender_name||'نامشخص')+'</b><span>'+esc(x.chat_title||'')+'</span></div><p>'+esc(x.content||x.text||'')+'</p><time>'+new Date(x.sent_at).toLocaleString('fa-IR')+'</time></div>').join(''):'<div class="empty">چیزی پیدا نشد.</div>'}}
-async function chats(){const {data}=await db.from('telegram_chats').select('*').order('last_message_at',{ascending:false,nullsFirst:false});const rows=data||[];content.innerHTML='<div class="head"><div><h2>گفتگوها</h2><div class="muted">چت‌های واردشده</div></div></div><div class="table panel glass">'+(rows.length?rows.map(r=>'<div class="item"><div><b>'+esc(r.title)+'</b><div class="type">'+esc(r.chat_type)+'</div></div><span>'+fa(r.message_count)+' پیام</span><time>'+(r.last_message_at?new Date(r.last_message_at).toLocaleDateString('fa-IR'):'—')+'</time></div>').join(''):'<div class="empty">هنوز گفتگویی وارد نشده.</div>')+'</div>'}
-function msgText(v){if(typeof v==='string')return v;if(!Array.isArray(v))return'';return v.map(p=>typeof p==='string'?p:(p&&typeof p.text==='string'?p.text:'')).join('')}
-function numericId(v){if(typeof v==='number')return String(v);const m=String(v??'').match(/-?\d+/);return m?m[0]:null}
-function chatType(t){const s=String(t||'').toLowerCase();if(s.includes('saved'))return'saved_messages';if(s.includes('private')||s.includes('personal'))return'private';if(s.includes('supergroup'))return'supergroup';if(s.includes('group'))return'group';if(s.includes('channel'))return'channel';return'unknown'}
-function parseExport(j,privateOnly){const raw=j?.chats?.list||j?.chats||[];const out=[];for(const c of raw){const cid=numericId(c.id);if(!cid)continue;const ct=chatType(c.type);if(privateOnly&&!['private','saved_messages'].includes(ct))continue;const messages=(c.messages||[]).map(m=>({telegram_message_id:Number(m.id),sender_name:m.from||m.actor||null,sent_at:m.date?new Date(m.date).toISOString():(m.date_unixtime?new Date(Number(m.date_unixtime)*1000).toISOString():new Date().toISOString()),text:msgText(m.text),reply_to_message_id:m.reply_to_message_id?Number(m.reply_to_message_id):null,is_service:m.type==='service',has_media:Boolean(m.file||m.photo||m.media_type),media_type:m.media_type||(m.photo?'photo':m.file?'file':null),raw:m})).filter(m=>Number.isFinite(m.telegram_message_id));const copy={...c};delete copy.messages;out.push({telegram_chat_id:cid,title:c.name||c.title||'بدون نام',username:c.username||null,chat_type:ct,raw:copy,messages})}return out}
-const chunk=(a,n)=>Array.from({length:Math.ceil(a.length/n)},(_,i)=>a.slice(i*n,i*n+n));
-function importPage(){content.innerHTML='<div class="head"><div><h2>ورود اطلاعات تلگرام</h2><div class="muted">فایل result.json خروجی Telegram Desktop</div></div></div><div class="upload panel glass"><div class="big">⬆️</div><h3>result.json</h3><p class="muted">Telegram Desktop → Settings → Advanced → Export Telegram Data → JSON</p><label class="check"><input id="privateOnly" type="checkbox" checked> فقط چت خصوصی و Saved Messages</label><label class="file primary">انتخاب فایل<input id="file" type="file" accept="application/json,.json"></label><div id="progress" class="progress"></div></div>';file.onchange=async()=>{const f=file.files?.[0];if(!f)return;file.disabled=true;progress.textContent='در حال خواندن فایل...';try{const j=JSON.parse(await f.text());const cs=parseExport(j,privateOnly.checked);const total=cs.reduce((a,c)=>a+c.messages.length,0);let count=0;for(let ci=0;ci<cs.length;ci++){const c=cs[ci];progress.textContent='گفتگو '+fa(ci+1)+' از '+fa(cs.length)+' — '+fa(count)+' از '+fa(total)+' پیام';const cr=await db.from('telegram_chats').upsert({owner_id:session.user.id,telegram_chat_id:c.telegram_chat_id,title:c.title,username:c.username,chat_type:c.chat_type,raw:c.raw,message_count:c.messages.length,last_message_at:c.messages.at(-1)?.sent_at||null},{onConflict:'owner_id,telegram_chat_id'}).select('id').single();if(cr.error)throw cr.error;for(const batch of chunk(c.messages,150)){const payload=batch.map(m=>({owner_id:session.user.id,chat_id:cr.data.id,telegram_message_id:m.telegram_message_id,sender_name:m.sender_name,sent_at:m.sent_at,text:m.text,normalized_text:m.text,reply_to_message_id:m.reply_to_message_id,is_service:m.is_service,has_media:m.has_media,media_type:m.media_type,raw:m.raw}));const mr=await db.from('telegram_messages').upsert(payload,{onConflict:'owner_id,chat_id,telegram_message_id'}).select('id,text');if(mr.error)throw mr.error;const xs=(mr.data||[]).filter(x=>x.text?.trim()).map(x=>({owner_id:session.user.id,message_id:x.id,chunk_index:0,content:x.text}));if(xs.length){const xr=await db.from('message_chunks').upsert(xs,{onConflict:'message_id,chunk_index'});if(xr.error)throw xr.error}count+=batch.length}}progress.textContent='✅ '+fa(cs.length)+' گفتگو و '+fa(count)+' پیام وارد شد.'}catch(e){progress.textContent='خطا: '+e.message}finally{file.disabled=false}}}
-boot();
+(function(){
+  const SB_URL='https://cohandrixpdthmpbxnsc.supabase.co';
+  const SB_KEY='sb_publishable_hPH1KRp-KM_RDY0pMwzT2w_SbF-jHjB';
+  const supa=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+
+  const el={
+    authView:document.getElementById('authView'),appView:document.getElementById('appView'),signinTab:document.getElementById('signinTab'),signupTab:document.getElementById('signupTab'),authForm:document.getElementById('authForm'),email:document.getElementById('emailInput'),password:document.getElementById('passwordInput'),authButton:document.getElementById('authButton'),authMessage:document.getElementById('authMessage'),nav:document.getElementById('nav'),logout:document.getElementById('logoutButton'),content:document.getElementById('content')
+  };
+  let mode='signin',session=null,page='dashboard';
+  const pages=[['dashboard','داشبورد'],['search','جست‌وجو'],['chats','گفتگوها'],['import','ورود اطلاعات']];
+  const esc=s=>String(s??'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+  const fa=n=>Number(n||0).toLocaleString('fa-IR');
+  const setMsg=(text,type='')=>{el.authMessage.textContent=text;el.authMessage.className='notice '+(type||'');};
+  const clearMsg=()=>{el.authMessage.className='notice hidden';el.authMessage.textContent='';};
+
+  function setMode(next){mode=next;el.signinTab.classList.toggle('active',mode==='signin');el.signupTab.classList.toggle('active',mode==='signup');el.authButton.textContent=mode==='signin'?'ورود':'ساخت حساب';el.password.setAttribute('autocomplete',mode==='signin'?'current-password':'new-password');clearMsg();}
+  el.signinTab.addEventListener('click',()=>setMode('signin'));
+  el.signupTab.addEventListener('click',()=>setMode('signup'));
+
+  el.authForm.addEventListener('submit',async(e)=>{
+    e.preventDefault();clearMsg();
+    const email=el.email.value.trim();const password=el.password.value;
+    if(!email||password.length<6){setMsg('ایمیل معتبر و رمز حداقل ۶ کاراکتری وارد کن.','error');return;}
+    el.authButton.disabled=true;el.authButton.textContent='در حال انجام...';
+    try{
+      let result;
+      if(mode==='signup'){
+        result=await supa.auth.signUp({email,password});
+      }else{
+        result=await supa.auth.signInWithPassword({email,password});
+      }
+      if(result.error) throw result.error;
+      if(mode==='signup'){
+        if(result.data.session){setMsg('حساب ساخته شد و وارد شدی ✅','ok');}
+        else{setMsg('حساب ساخته شد ✅ ایمیل تأیید برایت ارسال شده. ایمیلت را تأیید کن و بعد وارد شو.','ok');}
+      }
+    }catch(err){setMsg('خطا: '+(err?.message||String(err)),'error');}
+    finally{el.authButton.disabled=false;el.authButton.textContent=mode==='signin'?'ورود':'ساخت حساب';}
+  });
+
+  el.logout.addEventListener('click',()=>supa.auth.signOut());
+
+  function buildNav(){el.nav.innerHTML=pages.map(([id,label])=>`<button data-page="${id}" class="${page===id?'active':''}">${label}</button>`).join('');el.nav.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{page=b.dataset.page;buildNav();render();}));}
+  function toggle(){const logged=!!session;el.authView.classList.toggle('hidden',logged);el.appView.classList.toggle('hidden',!logged);if(logged){buildNav();render();}}
+
+  async function boot(){
+    const {data,error}=await supa.auth.getSession();if(error)console.error(error);session=data?.session||null;toggle();
+    supa.auth.onAuthStateChange((_event,next)=>{session=next;toggle();});
+  }
+
+  async function render(){if(!session)return;el.content.innerHTML='<div class="empty">در حال بارگذاری...</div>';if(page==='dashboard')return dashboard();if(page==='search')return searchPage();if(page==='chats')return chatsPage();if(page==='import')return importPage();}
+
+  async function dashboard(){
+    const [c,m,r]=await Promise.all([
+      supa.from('telegram_chats').select('*',{count:'exact',head:true}),
+      supa.from('telegram_messages').select('*',{count:'exact',head:true}),
+      supa.from('telegram_messages').select('id,sender_name,text,sent_at,telegram_chats(title)').order('sent_at',{ascending:false}).limit(8)
+    ]);
+    const recent=r.data||[];
+    el.content.innerHTML=`<div class="head"><div><h2>داشبورد</h2><div class="muted">خلاصه حافظه تلگرام تو</div></div><span class="badge">${esc(session.user.email)}</span></div><div class="stats"><div class="stat glass"><span>💬</span><b>${fa(m.count)}</b><small>پیام</small></div><div class="stat glass"><span>👥</span><b>${fa(c.count)}</b><small>گفتگو</small></div><div class="stat glass"><span>🔒</span><b>RLS</b><small>داده خصوصی</small></div></div><div class="panel glass"><h3>آخرین پیام‌ها</h3>${recent.length?recent.map(x=>`<div class="row"><div class="meta"><b>${esc(x.sender_name||'نامشخص')}</b><span>${esc(x.telegram_chats?.title||'')}</span></div><p>${esc(x.text||'[بدون متن]')}</p><time>${x.sent_at?new Date(x.sent_at).toLocaleString('fa-IR'):'—'}</time></div>`).join(''):'<div class="empty">هنوز پیامی وارد نشده. از «ورود اطلاعات» فایل JSON تلگرام را وارد کن.</div>'}</div>`;
+  }
+
+  function searchPage(){
+    el.content.innerHTML=`<div class="head"><div><h2>جست‌وجو</h2><div class="muted">بین پیام‌های تلگرام بگرد</div></div></div><form id="searchForm" class="search panel glass"><input id="q" class="input" placeholder="مثلاً: صحبت حسینی درباره دفتر"><button class="primary">جست‌وجو</button></form><div id="results"></div>`;
+    const form=document.getElementById('searchForm'),q=document.getElementById('q'),results=document.getElementById('results');
+    form.addEventListener('submit',async e=>{e.preventDefault();const term=q.value.trim();if(!term)return;results.innerHTML='<div class="empty">در حال جست‌وجو...</div>';const {data,error}=await supa.rpc('keyword_message_search',{query_text:term,match_count:50});if(error){results.innerHTML=`<div class="notice error">${esc(error.message)}</div>`;return;}const rows=data||[];results.innerHTML=rows.length?rows.map(x=>`<div class="panel glass row"><div class="meta"><b>${esc(x.sender_name||'نامشخص')}</b><span>${esc(x.chat_title||'')}</span></div><p>${esc(x.content||x.text||'')}</p><time>${x.sent_at?new Date(x.sent_at).toLocaleString('fa-IR'):'—'}</time></div>`).join(''):'<div class="empty">چیزی پیدا نشد.</div>';});
+  }
+
+  async function chatsPage(){const {data,error}=await supa.from('telegram_chats').select('*').order('last_message_at',{ascending:false,nullsFirst:false});if(error){el.content.innerHTML=`<div class="notice error">${esc(error.message)}</div>`;return;}const rows=data||[];el.content.innerHTML=`<div class="head"><div><h2>گفتگوها</h2><div class="muted">چت‌های واردشده</div></div></div><div class="panel glass">${rows.length?rows.map(r=>`<div class="chatItem"><div><b>${esc(r.title)}</b><div class="muted">${esc(r.chat_type)}</div></div><span>${fa(r.message_count)} پیام</span></div>`).join(''):'<div class="empty">هنوز گفتگویی وارد نشده.</div>'}</div>`;}
+
+  function msgText(v){if(typeof v==='string')return v;if(!Array.isArray(v))return'';return v.map(p=>typeof p==='string'?p:(p&&typeof p.text==='string'?p.text:'')).join('');}
+  function numericId(v){if(typeof v==='number')return String(v);const m=String(v??'').match(/-?\d+/);return m?m[0]:null;}
+  function chatType(t){const s=String(t||'').toLowerCase();if(s.includes('saved'))return'saved_messages';if(s.includes('private')||s.includes('personal'))return'private';if(s.includes('supergroup'))return'supergroup';if(s.includes('group'))return'group';if(s.includes('channel'))return'channel';return'unknown';}
+  function parseExport(j,privateOnly){const raw=j?.chats?.list||j?.chats||[];const out=[];for(const c of raw){const cid=numericId(c.id);if(!cid)continue;const ct=chatType(c.type);if(privateOnly&&!['private','saved_messages'].includes(ct))continue;const messages=(c.messages||[]).map(m=>({telegram_message_id:Number(m.id),sender_name:m.from||m.actor||null,sent_at:m.date?new Date(m.date).toISOString():(m.date_unixtime?new Date(Number(m.date_unixtime)*1000).toISOString():new Date().toISOString()),text:msgText(m.text),reply_to_message_id:m.reply_to_message_id?Number(m.reply_to_message_id):null,is_service:m.type==='service',has_media:Boolean(m.file||m.photo||m.media_type),media_type:m.media_type||(m.photo?'photo':m.file?'file':null)})).filter(m=>Number.isFinite(m.telegram_message_id));const copy={...c};delete copy.messages;out.push({telegram_chat_id:cid,title:c.name||c.title||'بدون نام',username:c.username||null,chat_type:ct,raw:copy,messages});}return out;}
+  const chunk=(a,n)=>Array.from({length:Math.ceil(a.length/n)},(_,i)=>a.slice(i*n,i*n+n));
+
+  function importPage(){
+    el.content.innerHTML=`<div class="head"><div><h2>ورود اطلاعات تلگرام</h2><div class="muted">فایل result.json خروجی Telegram Desktop</div></div></div><div class="upload panel glass"><div class="big">⬆️</div><h3>result.json</h3><p class="muted">Telegram Desktop → Settings → Advanced → Export Telegram Data → JSON</p><label class="check"><input id="privateOnly" type="checkbox" checked> فقط چت خصوصی و Saved Messages</label><label class="file primary">انتخاب فایل<input id="fileInput" type="file" accept="application/json,.json"></label><div id="progress" class="progress"></div></div>`;
+    const file=document.getElementById('fileInput'),privateOnly=document.getElementById('privateOnly'),progress=document.getElementById('progress');
+    file.addEventListener('change',async()=>{const f=file.files?.[0];if(!f)return;file.disabled=true;progress.textContent='در حال خواندن فایل...';try{const json=JSON.parse(await f.text());const chats=parseExport(json,privateOnly.checked);const total=chats.reduce((s,c)=>s+c.messages.length,0);let imported=0;for(let i=0;i<chats.length;i++){const c=chats[i];progress.textContent=`گفتگو ${fa(i+1)} از ${fa(chats.length)} — ${fa(imported)} از ${fa(total)} پیام`;const cr=await supa.from('telegram_chats').upsert({owner_id:session.user.id,telegram_chat_id:c.telegram_chat_id,title:c.title,username:c.username,chat_type:c.chat_type,raw:c.raw,message_count:c.messages.length,last_message_at:c.messages.at(-1)?.sent_at||null},{onConflict:'owner_id,telegram_chat_id'}).select('id').single();if(cr.error)throw cr.error;for(const batch of chunk(c.messages,200)){const payload=batch.map(m=>({owner_id:session.user.id,chat_id:cr.data.id,telegram_message_id:m.telegram_message_id,sender_name:m.sender_name,sent_at:m.sent_at,text:m.text,normalized_text:m.text,reply_to_message_id:m.reply_to_message_id,is_service:m.is_service,has_media:m.has_media,media_type:m.media_type}));const mr=await supa.from('telegram_messages').upsert(payload,{onConflict:'owner_id,chat_id,telegram_message_id'});if(mr.error)throw mr.error;imported+=batch.length;}}progress.textContent=`✅ ${fa(chats.length)} گفتگو و ${fa(imported)} پیام وارد شد.`;}catch(err){progress.textContent='خطا: '+(err?.message||String(err));}finally{file.disabled=false;}});
+  }
+
+  if(!window.supabase){setMsg('کتابخانه Supabase بارگذاری نشد. صفحه را Refresh کن.','error');return;}
+  boot();
+})();
 </script>
 </body>
 </html>
